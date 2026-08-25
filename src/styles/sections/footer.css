@@ -1,0 +1,21 @@
+.site-footer {
+  padding: var(--space-6) 10%;
+  text-align: center;
+  background: var(--nav-chrome-solid);
+  color: var(--theme-color-primary-light);
+  font-size: 0.85rem;
+}
+
+.site-footer p {
+  margin: 0 0 var(--space-2);
+}
+
+.footer-back-to-top {
+  color: var(--theme-color-primary-light);
+  text-decoration: underline;
+  font-size: 0.8rem;
+}
+
+.footer-back-to-top:hover {
+  color: var(--theme-color-secondary-accent);
+}

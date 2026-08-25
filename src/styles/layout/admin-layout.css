@@ -1,0 +1,157 @@
+/* ==========================================================================
+   ADMIN LAYOUT / SIDEBAR
+   Hardcoded colors from the original admin.css have been tokenized
+   so the admin panel follows the brand palette per site.
+   ========================================================================== */
+
+.admin-layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.admin-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  align-content: start;
+  flex: 1;
+  min-height: 0;
+}
+
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: var(--theme-color-primary-dark);
+}
+
+.admin-topbar-brand {
+  text-decoration: none;
+}
+
+.admin-topbar-brand .logo-font {
+  font-size: 1.1rem;
+}
+
+.admin-topbar-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.admin-topbar-actions .btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.admin-topbar-actions .btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.admin-sidebar {
+  width: 200px;
+  background: var(--theme-color-primary-dark);
+  color: #fff;
+  padding: 1rem;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.admin-sidebar h3 {
+  color: var(--theme-color-secondary-accent);
+  margin-top: 0;
+}
+
+.sidebar-toggle {
+  display: none;
+}
+
+.admin-main {
+  padding: 0;
+}
+
+.app-content {
+  padding: 4rem;
+}
+
+.admin-nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-nav li {
+  margin-bottom: var(--space-3);
+}
+
+.admin-sidebar button {
+  margin-top: var(--space-5);
+}
+
+.admin-nav a {
+  display: block;
+  padding: var(--space-2);
+  color: #fff;
+  text-decoration: none;
+}
+
+.admin-nav a.active {
+  background-color: var(--theme-color-secondary-accent);
+  color: var(--theme-color-primary-dark);
+  font-weight: bold;
+}
+
+.upload-status {
+  margin-top: var(--space-2);
+  font-size: 0.9rem;
+  color: var(--color-primary);
+}
+
+.intro-text {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  margin-bottom: 24px;
+}
+
+@media (max-width: 639.98px) {
+  .admin-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .app-content {
+    padding: 1.5rem;
+  }
+
+  .sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 12px;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--theme-color-primary-dark);
+    background: var(--color-lt-gray);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .admin-sidebar {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 240px;
+    max-width: 80vw;
+    height: 100vh;
+    z-index: 30;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
+    transition: right 0.3s ease-in-out;
+  }
+
+  .admin-sidebar.open {
+    right: 0;
+  }
+}

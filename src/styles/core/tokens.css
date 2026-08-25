@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Italiana&family=Roboto+Serif:ital,wght@0,100;0,300;0,400;1,100&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Darker+Grotesque&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Noto+Music&family=Shadows+Into+Light&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
+
+:root {
+  /* Fonts */
+  --display-font: "Montserrat", cursive;
+  --logo-font: "Special Elite", system-ui;
+  --copy-font: "Roboto Serif", sans-serif;
+
+  /* Ocean Palette */
+  --theme-color-primary-dark: rgba(51, 49, 70, 0.7);
+  --theme-color-secondary-dark: rgba(26, 172, 250, 0.7);
+  --theme-color-tertiary-dark: rgba(95, 149, 187, 0.6);
+  --primary-dark-gradcolor: rgba(31, 29, 54, 0.7);
+  /* Same color, fully opaque — used for nav/footer chrome where the
+     translucent version lets the background video visibly bleed through
+     (most noticeable when the nav wraps to two rows). */
+  --nav-chrome-solid: rgb(31, 29, 54, 0.95);
+
+  --theme-color-primary-medium: rgba(95, 38, 74, 0.95);
+  --theme-color-secondary-medium: rgba(100, 58, 107, 0.7);
+
+  --theme-color-primary-light: rgb(245, 245, 220);
+  --theme-color-secondary-light: rgb(245, 245, 245);
+  --theme-color-tertiary-light: rgba(254, 229, 224, 0.8);
+
+  --theme-color-light-white: rgba(255, 255, 255, 0.8);
+  --color-lt-gray: #f2f2f2;
+  --color-divider: #e5e7eb;
+
+  --theme-color-primary-accent: rgb(88, 64, 200);
+  --theme-color-secondary-accent: rgb(242, 206, 58);
+  --theme-color-tertiary-accent: rgb(80, 185, 187);
+
+  --theme-color-primary-a11y: rgb(0, 118, 205);
+  --theme-color-secondary-a11y: rgb(0, 120, 130);
+
+  /* Semantic aliases — referenced by auth.css / admin-layout.css / tables.css.
+     Mapped to the existing Ocean Palette rather than left undefined
+     (which was silently falling back to generic, off-brand colors). */
+  --color-text: rgb(51, 49, 70);
+  --color-text-muted: #6b7280;
+  --color-primary: var(--theme-color-primary-accent);
+  --color-border: var(--color-divider);
+  --color-input-bg: #fafafb;
+  --color-success: var(--color-status-approved);
+  --color-error: var(--color-status-danger);
+  --fs-200: 0.85rem;
+
+  /* Status colors (used by badges, alerts, etc.) */
+  --color-status-pending: #777777;
+  --color-status-approved: #4caf50;
+  --color-status-spam: #ff9800;
+  --color-status-danger: #f44336;
+
+  /* Radii & shadows */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12), 0 10px 24px rgba(0, 0, 0, 0.18);
+  --shadow-lg: 0 6px 12px rgba(0, 0, 0, 0.15), 0 16px 32px rgba(0, 0, 0, 0.2);
+  --shadow-gold:
+    0 6px 12px rgba(0, 0, 0, 0.15), 0 16px 32px rgba(228, 195, 64, 0.2);
+  --img-box-shadow: 10px 10px 5px grey;
+
+  /* Layout */
+  --nav-height: 104px; /* measured from .site-nav's real rendered height */
+
+  /* Spacing (4px baseline) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-md: 80px;
+  --space-lg: 100px;
+}

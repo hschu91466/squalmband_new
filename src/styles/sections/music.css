@@ -1,0 +1,27 @@
+#music {
+  background: var(--theme-color-secondary-medium);
+  color: var(--theme-color-primary-light);
+}
+
+.stream-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+  width: 100%;
+}
+
+.stream-card {
+  padding: var(--space-4);
+}
+
+.stream-card iframe {
+  display: block;
+  width: 100%;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 600px) {
+  .stream-grid {
+    grid-template-columns: 1fr;
+  }
+}

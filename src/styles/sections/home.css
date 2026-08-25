@@ -1,0 +1,127 @@
+#home {
+  background: var(--theme-color-primary-dark);
+  color: var(--theme-color-primary-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: calc(100vh - var(--nav-height));
+  padding-bottom: var(--space-6);
+  gap: var(--space-6);
+}
+
+.home-main {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.home-content {
+  flex: 2;
+}
+
+.home-content h2 {
+  font-family: var(--display-font);
+  font-size: 2rem;
+  margin-bottom: var(--space-4);
+}
+
+.home-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.featured-video {
+  flex: 1;
+  text-align: center;
+}
+
+.featured-video-label {
+  font-family: var(--display-font);
+  font-size: 1rem;
+  margin-bottom: var(--space-3);
+}
+
+.featured-video-thumb {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.featured-video-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.play-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+.featured-video-thumb:hover .play-button,
+.featured-video-thumb:focus .play-button {
+  background: var(--theme-color-primary-dark);
+}
+
+.featured-video-title {
+  margin-top: var(--space-2);
+  font-size: 0.9rem;
+  color: var(--theme-color-primary-light);
+}
+
+.social-links {
+  list-style: none;
+  display: flex;
+  gap: var(--space-4);
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--theme-color-primary-light);
+  transition: background 0.2s ease;
+}
+
+.social-links a:hover,
+.social-links a:focus {
+  background: var(--theme-color-secondary-accent);
+  color: var(--theme-color-primary-dark);
+}
+
+@media (max-width: 1200px) {
+  #home {
+    justify-content: flex-start;
+  }
+
+  .home-main {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .featured-video {
+    align-self: center;
+  }
+}

@@ -1,0 +1,31 @@
+# Environment / secrets — never commit real credentials
+.env
+.env.*
+!.env.example
+
+# Local testing artifacts — curl cookie jars
+cookies.txt
+*_cookies.txt
+test.php
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build output
+dist/
+build/
+
+# Logs
+app/logs/*.log
+npm-debug.log*
+
+# Editor / OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# Vite
+.vite/

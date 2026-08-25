@@ -1,0 +1,42 @@
+/* ==========================================================================
+   TABLES
+   ========================================================================== */
+
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-left: 1px solid var(--color-divider);
+  border-right: 1px solid var(--color-divider);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.table th,
+.table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--color-divider);
+  text-align: left;
+  font-size: var(--fs-200);
+}
+
+.table th {
+  font-weight: 600;
+  background: var(--color-lt-gray);
+}
+
+.table tr:hover {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.message-cell {
+  max-width: 300px;
+  word-wrap: break-word;
+}
+
+.row-unread {
+  background-color: #fff8e1; /* subtle highlight — consider tokenizing if reused across sites */
+}

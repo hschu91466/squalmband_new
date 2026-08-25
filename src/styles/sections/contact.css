@@ -1,0 +1,16 @@
+#contact {
+  background: var(--theme-color-primary-dark);
+  color: var(--theme-color-primary-light);
+}
+
+.contact-section {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-panel {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 20px;
+}

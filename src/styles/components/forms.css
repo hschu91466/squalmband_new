@@ -1,0 +1,121 @@
+/* ==========================================================================
+   FORMS
+   Shared structural rules for all forms (label/input layout, spacing).
+   Two theme blocks apply color on top of that shared structure:
+   - Public site forms (default): light, translucent inputs suited to
+     sitting on the dark, translucent site sections. Pair with the
+     shared .card class for a visible container against the video bg.
+   - Admin forms: scoped automatically via .admin-main .form, since every
+     admin page renders inside that container — no extra classes needed
+     on individual admin form components. Solid, opaque, readable on
+     admin's plain light background. No card wrapper needed here.
+   ========================================================================== */
+
+/* Structural rules — shared everywhere */
+.form {
+  text-align: left;
+}
+
+.form label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin: 16px 0 6px;
+}
+
+.form label:first-of-type {
+  margin-top: 0;
+}
+
+.form input,
+.form textarea {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-family: var(--copy-font);
+  font-size: 15px;
+}
+
+.form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form label.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0;
+  font-weight: 400;
+  text-shadow: none;
+  cursor: pointer;
+}
+
+.form input[type="checkbox"] {
+  display: inline-block;
+  width: auto;
+  padding: 0;
+  border: none;
+  background: none;
+  border-radius: 0;
+  cursor: pointer;
+}
+
+.form .message-button,
+.form .btn {
+  margin-top: 20px;
+}
+
+/* Public site theme (default) — sits on dark/translucent sections */
+.form label {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.form input,
+.form textarea {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.9);
+  color: #222;
+}
+
+.form input:focus,
+.form textarea:focus {
+  outline: none;
+  border-color: #fff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+.form input[type="checkbox"] {
+  accent-color: var(--theme-color-secondary-accent);
+}
+
+.form .message-button {
+  width: 100%;
+}
+
+/* Admin theme — solid, readable on a plain light page, no card needed */
+.admin-main .form label {
+  color: var(--color-text);
+  text-shadow: none;
+}
+
+.admin-main .form input,
+.admin-main .form textarea {
+  border: 1px solid var(--color-border);
+  background: #fff;
+  color: var(--color-text);
+}
+
+.admin-main .form input:focus,
+.admin-main .form textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(88, 64, 200, 0.15);
+}
+
+.admin-main .form input[type="checkbox"] {
+  accent-color: var(--color-primary);
+}

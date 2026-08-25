@@ -1,0 +1,130 @@
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.button-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-divider);
+  background: var(--theme-color-light-white);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary,
+.btn-tab {
+  background: var(--theme-color-primary-dark);
+  color: #fff;
+  border: none;
+}
+
+.btn-primary:focus,
+.btn-tab:focus {
+  outline: 2px solid var(--theme-color-primary-dark);
+  outline-offset: 2px;
+}
+
+.btn-primary:hover,
+.btn-tab:hover {
+  background: var(--theme-color-tertiary-dark);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.btn-active {
+  background: var(--theme-color-primary-dark);
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  border: none;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-active:hover {
+  background: var(--theme-color-tertiary-dark);
+}
+
+.btn-sm {
+  padding: 5px 8px;
+  font-size: 0.8rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.move-btn {
+  width: 28px;
+  padding: 0;
+  text-align: center;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Admin moderation action buttons (approve / spam / delete)
+   Previously hardcoded colors in admin-comments.css — now tokenized
+   so they follow brand status colors per site. */
+.btn-approve {
+  background: var(--color-status-approved);
+  color: white;
+}
+
+.btn-spam {
+  background: var(--color-status-spam);
+  color: white;
+}
+
+.btn-delete {
+  background: var(--color-status-danger);
+  color: white;
+}
+
+.comment-actions button {
+  margin-right: 6px;
+  padding: 4px 8px;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+/* SHARED BUTTONS */
+
+.content-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.message-button {
+  font-size: 1.25rem;
+  padding: 10px 35px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  background: var(--theme-color-primary-dark);
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.message-button:hover {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid #fff;
+  color: #fff;
+}
+
+.message-button:disabled,
+.message-button[aria-disabled="true"] {
+  background: rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
+}
