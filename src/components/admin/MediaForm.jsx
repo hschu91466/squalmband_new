@@ -142,7 +142,7 @@ const MediaForm = ({ item, onSaved, onCancel }) => {
           checked={form.is_cover}
           onChange={handleChange}
         />
-        Cover / Highlight
+        Cover Song
       </label>
 
       <div className="button-group">

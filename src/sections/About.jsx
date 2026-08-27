@@ -6,7 +6,7 @@ const About = () => {
       <div className="about-grid grid-2col">
         <div className="about-column">
           <h2 className="section-heading about-heading">About</h2>
-          <div className="about-bio">
+          <div className="about-bio card">
             <p>
               Brothers Josiah and Isaiah Schu were raised in Colfax, Washington.
               They met coincidentally on the day of Isaiah's birth. Since then,

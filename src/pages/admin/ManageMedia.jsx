@@ -149,13 +149,14 @@ const ManageMedia = () => {
             <tbody>
               {items.map((item) => (
                 <tr key={item.id}>
-                  <td>{item.title}</td>
-                  <td>{item.platform}</td>
-                  <td>{item.placement}</td>
-                  <td>{item.is_cover ? "Yes" : ""}</td>
-                  <td>{item.sort_order}</td>
+                  <td data-label="Title">{item.title}</td>
+                  <td data-label="Platform">{item.platform}</td>
+                  <td data-label="Placement">{item.placement}</td>
+                  <td data-label="Cover">{item.is_cover ? "Yes" : ""}</td>
+                  <td data-label="Sort">{item.sort_order}</td>
                   <td>
                     <button
+                      data-label="Actions"
                       className="btn btn-sm"
                       onClick={() => {
                         setEditingItem(item);

@@ -97,6 +97,14 @@
 }
 
 /* Admin theme — solid, readable on a plain light page, no card needed */
+.admin-main .form {
+  max-width: 500px;
+  padding: 24px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+}
+
 .admin-main .form label {
   color: var(--color-text);
   text-shadow: none;
@@ -118,4 +126,11 @@
 
 .admin-main .form input[type="checkbox"] {
   accent-color: var(--color-primary);
+}
+
+@media (max-width: 600px) {
+  .admin-main .form {
+    padding: 16px;
+    max-width: 100%;
+  }
 }

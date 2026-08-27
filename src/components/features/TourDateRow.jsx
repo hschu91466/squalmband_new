@@ -17,7 +17,7 @@ const formatTime = (dateStr) => {
 
 const TourDateRow = ({ tourDate }) => {
   return (
-    <li className="tour-row">
+    <li className="tour-row card">
       <div className="tour-date">
         <span className="tour-date-day">{formatDate(tourDate.tour_date)}</span>
         <span className="tour-date-time">{formatTime(tourDate.tour_date)}</span>

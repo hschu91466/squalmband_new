@@ -13,7 +13,6 @@
 .admin-layout {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
-  align-content: start;
   flex: 1;
   min-height: 0;
 }
@@ -31,7 +30,7 @@
 }
 
 .admin-topbar-brand .logo-font {
-  font-size: 1.1rem;
+  font-size: 2rem;
 }
 
 .admin-topbar-actions {
@@ -40,13 +39,14 @@
 }
 
 .admin-topbar-actions .btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  color: #fff;
+  background: var(--theme-color-secondary-accent);
+  border: none;
+  color: var(--theme-color-primary-dark);
+  font-weight: 600;
 }
 
 .admin-topbar-actions .btn:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgb(255, 220, 100);
 }
 
 .admin-sidebar {
@@ -59,6 +59,7 @@
 }
 
 .admin-sidebar h3 {
+  font-size: 1.3rem;
   color: var(--theme-color-secondary-accent);
   margin-top: 0;
 }
@@ -69,6 +70,7 @@
 
 .admin-main {
   padding: 0;
+  align-self: start;
 }
 
 .app-content {
@@ -113,13 +115,58 @@
   margin-bottom: 24px;
 }
 
+.admin-dashboard-nav-hint {
+  color: var(--color-text-muted);
+}
+
+.admin-dashboard-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.admin-dashboard-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 180px;
+  padding: 16px 20px;
+  background: #fffbea;
+  border-left: 4px solid var(--theme-color-secondary-accent);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s ease;
+}
+
+.admin-dashboard-card:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.admin-dashboard-count {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--theme-color-secondary-accent);
+  font-family: var(--display-font);
+}
+
+.admin-dashboard-label {
+  color: var(--color-text);
+  font-size: 0.95rem;
+}
+
 @media (max-width: 639.98px) {
   .admin-layout {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .app-content {
-    padding: 1.5rem;
+    padding: 1rem 1.5rem 1.5rem;
+  }
+
+  .app-content h2:first-of-type {
+    margin-top: 0;
   }
 
   .sidebar-toggle {

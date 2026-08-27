@@ -28,8 +28,12 @@ const ManageNewsletter = () => {
         if (!ignore) {
           if (historyRes.success) setHistory(historyRes.data);
           if (subsRes.success) setSubscribers(subsRes.data);
-          if (!historyRes.success || !subsRes.success) {
-            setLoadError("Some newsletter data failed to load");
+          if (!historyRes.success && !subsRes.success) {
+            setLoadError("Failed to load send history and subscribers");
+          } else if (!historyRes.success) {
+            setLoadError("Failed to load send history");
+          } else if (!subsRes.success) {
+            setLoadError("Failed to load subscribers");
           }
         }
       } catch (err) {

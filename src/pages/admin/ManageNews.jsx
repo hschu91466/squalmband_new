@@ -113,11 +113,11 @@ const ManageNews = () => {
             <tbody>
               {posts.map((post) => (
                 <tr key={post.id}>
-                  <td>{post.title}</td>
-                  <td>{post.news_date}</td>
-                  <td>{post.media_type}</td>
-                  <td>{post.section}</td>
-                  <td>
+                  <td data-label="Title">{post.title}</td>
+                  <td data-label="Date">{post.news_date}</td>
+                  <td data-label="Type">{post.media_type}</td>
+                  <td data-label="Section">{post.section}</td>
+                  <td data-label="Actions">
                     <button
                       className="btn btn-sm"
                       onClick={() => {

@@ -118,7 +118,7 @@ const Navigation = () => {
             <li>
               <Link
                 to="/admin"
-                className="site-nav-link"
+                className="site-nav-link admin-nav-link"
                 onClick={() => setMenuOpen(false)}
               >
                 Admin

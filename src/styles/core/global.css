@@ -30,7 +30,6 @@ body {
   margin: 0;
   font-family: var(--copy-font);
   color: #222;
-  background-color: var(--primary-dark-gradcolor);
 }
 
 h1,
@@ -251,6 +250,16 @@ section {
 .site-nav-link:hover,
 .site-nav-link.is-active {
   border-bottom: 3px solid rgb(242, 206, 58);
+}
+
+.admin-nav-link {
+  color: var(--color-status-danger);
+  font-weight: 700;
+}
+
+.admin-nav-link:hover,
+.admin-nav-link.is-active {
+  border-bottom-color: var(--color-status-danger);
 }
 
 .nav-toggle {
