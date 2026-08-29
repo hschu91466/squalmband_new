@@ -158,7 +158,9 @@
 
 @media (max-width: 639.98px) {
   .admin-layout {
+    display: grid;
     grid-template-columns: minmax(0, 1fr);
+    flex: none;
   }
 
   .app-content {

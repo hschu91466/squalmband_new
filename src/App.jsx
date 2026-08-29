@@ -11,6 +11,7 @@ import ManageNews from "./pages/admin/ManageNews";
 import ManageUsers from "./pages/admin/ManageUsers";
 import ManageMedia from "./pages/admin/ManageMedia";
 import ManageMessages from "./pages/admin/ManageMessages";
+import ManageComments from "./pages/admin/ManageComments";
 import ManageNewsletter from "./pages/admin/ManageNewsletter";
 
 import MainPage from "./pages/MainPage";
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="users" element={<ManageUsers />} />
           <Route path="media" element={<ManageMedia />} />
           <Route path="messages" element={<ManageMessages />} />
+          <Route path="comments" element={<ManageComments />} />
           <Route path="newsletter" element={<ManageNewsletter />} />
         </Route>
       </Route>

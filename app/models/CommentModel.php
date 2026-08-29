@@ -143,7 +143,7 @@ class CommentModel
       c.created_at,
       i.title
       FROM comments c
-      Left Join images i on c.content_id = i.image_id
+      Left Join media i on c.content_id = i.id
       WHERE $where
       ORDER BY created_at DESC
       LIMIT :limit OFFSET :offset";

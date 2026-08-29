@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Play } from "lucide-react";
+import VideoCommentModal from "../comments/VideoCommentModal";
 
-const VideoCard = ({ title, embedCode }) => {
+const VideoCard = ({ id, title, embedCode }) => {
   const [playing, setPlaying] = useState(false);
+  const [showComments, setShowComments] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   return (
     <div className="card video-card">
@@ -33,7 +36,28 @@ const VideoCard = ({ title, embedCode }) => {
           </span>
         </button>
       )}
-      <p className="video-card-title">{title}</p>
+
+      <div className="video-card-title-row">
+        <p className="video-card-title">{title}</p>
+        <button
+          type="button"
+          className="video-card-comment-btn"
+          onClick={() => setShowComments(true)}
+          aria-label={`Comment on ${title}`}
+          title="Add/View comments"
+        >
+          💬
+        </button>
+      </div>
+
+      {showComments && (
+        <VideoCommentModal
+          video={{ id, title, embedCode }}
+          onClose={() => setShowComments(false)}
+          refreshKey={refreshKey}
+          setRefreshKey={setRefreshKey}
+        />
+      )}
     </div>
   );
 };

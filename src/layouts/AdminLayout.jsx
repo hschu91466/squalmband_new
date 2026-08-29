@@ -65,6 +65,15 @@ const AdminLayout = () => {
               </li>
               <li>
                 <NavLink
+                  to="/admin/comments"
+                  onClick={closeSidebar}
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  Manage Comments
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to="/admin/media"
                   onClick={closeSidebar}
                   className={({ isActive }) => (isActive ? "active" : "")}

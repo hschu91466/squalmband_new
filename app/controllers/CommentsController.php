@@ -146,7 +146,7 @@ class CommentsController
         } catch (Throwable $e) {
             return [
                 'ok' => false,
-                'error' => 'Server error'
+                'error' => 'Server error',
             ];
         }
     }
@@ -245,9 +245,11 @@ class CommentsController
                 'comments' => $rows
             ];
         } catch (Throwable $e) {
+            error_log("Comment create failed: " . $e->getMessage());
             return [
                 'ok' => false,
-                'error' => 'Server error'
+                'error' => 'Server error',
+                'debug' => $e->getMessage() // TEMP — remove after debugging
             ];
         }
     }

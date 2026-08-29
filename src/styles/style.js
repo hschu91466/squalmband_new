@@ -24,3 +24,6 @@ import "./sections/contact.css";
 import "./sections/tour.css";
 import "./sections/about.css";
 import "./sections/footer.css";
+
+// Features
+import "./features/comments.css";

@@ -43,6 +43,7 @@ const Video = () => {
             {videos.map((video) => (
               <VideoCard
                 key={video.id}
+                id={video.id}
                 title={video.title}
                 embedCode={video.embed_code}
               />
