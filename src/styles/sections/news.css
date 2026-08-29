@@ -1,5 +1,6 @@
 #news {
-  background: var(--theme-color-primary-medium);
+  /* background: var(--theme-color-tertiary-medium); */
+  background: var(--theme-color-secondary-dark);
   color: var(--theme-color-primary-light);
 }
 
@@ -7,6 +8,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .news-item {

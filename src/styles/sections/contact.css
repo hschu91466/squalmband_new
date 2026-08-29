@@ -1,6 +1,7 @@
 #contact {
-  background: var(--theme-color-primary-dark);
-  color: var(--theme-color-primary-light);
+  /* background: var(--theme-color-secondary-dark); */
+  background: var(--theme-color-tertiary-medium);
+  color: var(--theme-color-secondary-light);
 }
 
 .contact-section {

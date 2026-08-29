@@ -1,6 +1,6 @@
 #about {
-  background: var(--theme-color-secondary-medium);
-  color: var(--theme-color-primary-light);
+  background: var(--theme-color-secondary-dark);
+  color: var(--theme-color-secondary-light);
 }
 
 .about-section {

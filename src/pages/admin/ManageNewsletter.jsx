@@ -12,6 +12,7 @@ const ManageNewsletter = () => {
   const [subscribers, setSubscribers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState("");
+  const [activeTab, setActiveTab] = useState("compose");
 
   useEffect(() => {
     let ignore = false;
@@ -121,61 +122,36 @@ const ManageNewsletter = () => {
     <div className="newsletter-page">
       <h2>Newsletter</h2>
 
-      <section>
-        <h3>Compose</h3>
-        <form
-          className="form"
-          onSubmit={handleSend}
-          aria-label="Compose newsletter"
+      <div
+        className="button-group"
+        role="tablist"
+        aria-label="Newsletter sections"
+      >
+        <button
+          type="button"
+          className={activeTab === "compose" ? "btn btn-active" : "btn"}
+          aria-pressed={activeTab === "compose"}
+          onClick={() => setActiveTab("compose")}
         >
-          <label htmlFor="newsletter-subject">Subject</label>
-          <input
-            id="newsletter-subject"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            required
-          />
-
-          <label htmlFor="newsletter-body">Body (HTML)</label>
-          <textarea
-            id="newsletter-body"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-            required
-            rows={8}
-          ></textarea>
-
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={sending}
-            aria-busy={sending}
-          >
-            {sending
-              ? "Sending..."
-              : `Send to ${subscribers.length} subscriber(s)`}
-          </button>
-
-          {sendError && (
-            <p
-              className="auth-message auth-message--error"
-              role="alert"
-              aria-live="assertive"
-            >
-              {sendError}
-            </p>
-          )}
-          {sendSuccess && (
-            <p
-              className="auth-message auth-message--success"
-              role="status"
-              aria-live="polite"
-            >
-              {sendSuccess}
-            </p>
-          )}
-        </form>
-      </section>
+          Compose
+        </button>
+        <button
+          type="button"
+          className={activeTab === "history" ? "btn btn-active" : "btn"}
+          aria-pressed={activeTab === "history"}
+          onClick={() => setActiveTab("history")}
+        >
+          Send History
+        </button>
+        <button
+          type="button"
+          className={activeTab === "subscribers" ? "btn btn-active" : "btn"}
+          aria-pressed={activeTab === "subscribers"}
+          onClick={() => setActiveTab("subscribers")}
+        >
+          Subscribers
+        </button>
+      </div>
 
       {loadError && (
         <p
@@ -189,76 +165,134 @@ const ManageNewsletter = () => {
 
       {loading && <p>Loading...</p>}
 
-      {!loading && (
-        <>
-          <section>
-            <h3>Send History</h3>
-            {history.length === 0 ? (
-              <p>No newsletters sent yet.</p>
-            ) : (
-              <div className="table-wrapper">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Subject</th>
-                      <th>Sent At</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {history.map((item) => (
-                      <tr key={item.id}>
-                        <td>{item.subject}</td>
-                        <td>
-                          {item.sent_at
-                            ? new Date(item.sent_at).toLocaleString(undefined, {
-                                dateStyle: "medium",
-                                timeStyle: "short",
-                              })
-                            : "—"}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </section>
+      {!loading && activeTab === "compose" && (
+        <div>
+          <h3>Compose</h3>
+          <form
+            className="form"
+            onSubmit={handleSend}
+            aria-label="Compose newsletter"
+          >
+            <label htmlFor="newsletter-subject">Subject</label>
+            <input
+              id="newsletter-subject"
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              required
+            />
 
-          <section>
-            <h3>Subscribers ({subscribers.length})</h3>
-            {subscribers.length === 0 ? (
-              <p>No subscribers yet.</p>
-            ) : (
-              <div className="table-wrapper">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th>Email</th>
-                      <th>Name</th>
-                      <th>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {subscribers.map((sub) => (
-                      <tr key={sub.id || sub.email}>
-                        <td>{sub.email}</td>
-                        <td>{subscriberName(sub)}</td>
-                        <td>
-                          <button
-                            className="btn btn-sm btn-delete"
-                            onClick={() => handleRemove(sub.email)}
-                          >
-                            Remove
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            <label htmlFor="newsletter-body">Body (HTML)</label>
+            <textarea
+              id="newsletter-body"
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+              required
+              rows={8}
+            ></textarea>
+
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={sending}
+              aria-busy={sending}
+            >
+              {sending
+                ? "Sending..."
+                : `Send to ${subscribers.length} subscriber(s)`}
+            </button>
+
+            {sendError && (
+              <p
+                className="auth-message auth-message--error"
+                role="alert"
+                aria-live="assertive"
+              >
+                {sendError}
+              </p>
             )}
-          </section>
-        </>
+            {sendSuccess && (
+              <p
+                className="auth-message auth-message--success"
+                role="status"
+                aria-live="polite"
+              >
+                {sendSuccess}
+              </p>
+            )}
+          </form>
+        </div>
+      )}
+
+      {!loading && activeTab === "history" && (
+        <div>
+          <h3>Send History</h3>
+          {history.length === 0 ? (
+            <p>No newsletters sent yet.</p>
+          ) : (
+            <div className="table-wrapper">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Subject</th>
+                    <th>Sent At</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {history.map((item) => (
+                    <tr key={item.id}>
+                      <td>{item.subject}</td>
+                      <td>
+                        {item.sent_at
+                          ? new Date(item.sent_at).toLocaleString(undefined, {
+                              dateStyle: "medium",
+                              timeStyle: "short",
+                            })
+                          : "—"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
+
+      {!loading && activeTab === "subscribers" && (
+        <div>
+          <h3>Subscribers ({subscribers.length})</h3>
+          {subscribers.length === 0 ? (
+            <p>No subscribers yet.</p>
+          ) : (
+            <div className="table-wrapper">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {subscribers.map((sub) => (
+                    <tr key={sub.id || sub.email}>
+                      <td>{sub.email}</td>
+                      <td>{subscriberName(sub)}</td>
+                      <td>
+                        <button
+                          className="btn btn-sm btn-delete"
+                          onClick={() => handleRemove(sub.email)}
+                        >
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

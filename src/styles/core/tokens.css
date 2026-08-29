@@ -21,8 +21,11 @@
      (most noticeable when the nav wraps to two rows). */
   --nav-chrome-solid: rgb(31, 29, 54, 0.95);
 
+  --section-color-1: rgba(0, 200, 130, 0.6);
+
   --theme-color-primary-medium: rgba(95, 38, 74, 0.95);
   --theme-color-secondary-medium: rgba(100, 58, 107, 0.7);
+  --theme-color-tertiary-medium: rgba(88, 64, 200, 0.7);
 
   --theme-color-primary-light: rgb(245, 245, 220);
   --theme-color-secondary-light: rgb(245, 245, 245);

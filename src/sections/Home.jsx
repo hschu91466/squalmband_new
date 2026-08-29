@@ -1,45 +1,45 @@
 import { useEffect, useState } from "react";
 import { mediaService } from "../services/media";
+import { Play } from "lucide-react";
 import {
-  Link as LinkIcon,
-  Camera,
-  AtSign,
-  Music2,
-  MessageCircle,
-  Apple,
-  Play,
-} from "lucide-react";
+  FaFacebook,
+  FaInstagram,
+  FaSpotify,
+  FaXTwitter,
+  FaSnapchat,
+  FaApple,
+} from "react-icons/fa6";
 
 const SOCIAL_LINKS = [
   {
     name: "Facebook",
     href: "https://www.facebook.com/profile.php?id=61551555816555&mibextid=ZbWKwL",
-    icon: LinkIcon,
+    icon: FaFacebook,
   },
   {
     name: "Spotify",
     href: "https://open.spotify.com/artist/2cMMWuinHbQs0Bf1RTVNgH?si=edduLr8cTeWX836mLhJjCA",
-    icon: Music2,
+    icon: FaSpotify,
   },
   {
     name: "Instagram",
     href: "https://instagram.com/squalm2?igshid=OGQ5ZDc2ODk2ZA==",
-    icon: Camera,
+    icon: FaInstagram,
   },
   {
     name: "Twitter X",
     href: "https://x.com/Squalm1175841?t=zaONE7OqIAf8n9NFVbKSTQ&s=09",
-    icon: AtSign,
+    icon: FaXTwitter,
   },
   {
     name: "Snapchat",
     href: "https://www.snapchat.com/add/squalm_band?share_id=VylJjntB1DM&locale=en-US",
-    icon: MessageCircle,
+    icon: FaSnapchat,
   },
   {
     name: "Apple Music",
     href: "https://music.apple.com/us/artist/squalm/1623436486",
-    icon: Apple,
+    icon: FaApple,
   },
 ];
 

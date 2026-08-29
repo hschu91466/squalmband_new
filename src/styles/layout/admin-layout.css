@@ -194,6 +194,7 @@
     max-width: 80vw;
     height: 100vh;
     z-index: 30;
+    background: var(--nav-chrome-solid);
     box-shadow: -4px 0 20px rgba(0, 0, 0, 0.3);
     transition: right 0.3s ease-in-out;
   }

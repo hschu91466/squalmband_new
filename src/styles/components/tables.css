@@ -63,30 +63,45 @@
 
   .table tr {
     display: block;
+    position: relative;
     margin-bottom: 16px;
+    padding: 12px 12px 12px;
     border: 1px solid var(--color-divider);
     border-radius: var(--radius-sm);
     overflow: hidden;
   }
 
   .table td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--color-divider);
-    text-align: right;
-  }
-
-  .table td:last-child {
+    display: block;
+    padding: 4px 0;
     border-bottom: none;
+    text-align: left;
   }
 
   .table td::before {
-    content: attr(data-label);
+    content: none;
+  }
+
+  /* Status: pulled to the top-right as a small label */
+  .table td[data-label="Status"] {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 0;
+    width: auto;
+    font-size: var(--fs-200);
+    color: var(--color-text-muted);
+  }
+
+  /* Primary title-ish column: bold like a card title */
+  .table td[data-label="Name"],
+  .table td[data-label="Title"] {
     font-weight: 600;
-    text-align: left;
-    flex-shrink: 0;
+    padding-right: 60px; /* keep clear of the status badge, when present */
+  }
+
+  /* Secondary column: muted */
+  .table td[data-label="Email"] {
+    color: var(--color-text-muted);
   }
 }
