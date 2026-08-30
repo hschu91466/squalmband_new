@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { commentsService } from "../../services/comments";
+import { formatDateTime } from "../../utils/formatDate";
 
 const CommentList = ({ contentId }) => {
   const [comments, setComments] = useState([]);
@@ -45,10 +46,7 @@ const CommentList = ({ contentId }) => {
               <div className="video-comment-header">
                 <strong>{comment.name}</strong>
                 <span className="video-comment-date" aria-label="Posted on">
-                  {new Date(comment.created_at).toLocaleString(undefined, {
-                    dateStyle: "medium",
-                    timeStyle: "short",
-                  })}
+                  {formatDateTime(comment.created_at)}
                 </span>
               </div>
               <p>{comment.body}</p>

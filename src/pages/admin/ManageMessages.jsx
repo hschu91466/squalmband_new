@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { messagesService } from "../../services/messages";
+import { formatDateTime } from "../../utils/formatDate";
 
 const ManageMessages = () => {
   const [messages, setMessages] = useState([]);
@@ -195,12 +196,7 @@ const ManageMessages = () => {
                       {msg.message}
                     </td>
 
-                    <td data-label="Date">
-                      {new Date(msg.created_at).toLocaleString(undefined, {
-                        dateStyle: "medium",
-                        timeStyle: "short",
-                      })}
-                    </td>
+                    <td data-label="Date">{formatDateTime(msg.created_at)}</td>
 
                     <td data-label="Actions" className="button-group">
                       {!isRead && (

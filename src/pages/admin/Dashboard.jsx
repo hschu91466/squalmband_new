@@ -5,6 +5,7 @@ import { usersService } from "../../services/users";
 import { messagesService } from "../../services/messages";
 import { newsService } from "../../services/news";
 import { mediaService } from "../../services/media";
+import { newsletterService } from "../../services/newsletter";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -13,6 +14,7 @@ const Dashboard = () => {
     newMessages: 0,
     newsPosts: 0,
     mediaItems: 0,
+    newsletterSubscribers: 0,
   });
   const [loading, setLoading] = useState(true);
 
@@ -22,12 +24,14 @@ const Dashboard = () => {
     async function loadCounts() {
       setLoading(true);
       try {
-        const [usersRes, messagesRes, newsRes, mediaRes] = await Promise.all([
-          usersService.list("pending"),
-          messagesService.list(),
-          newsService.list(),
-          mediaService.list(),
-        ]);
+        const [usersRes, messagesRes, newsRes, mediaRes, subscriberRes] =
+          await Promise.all([
+            usersService.list("pending"),
+            messagesService.list(),
+            newsService.list(),
+            mediaService.list(),
+            newsletterService.subscribers(),
+          ]);
 
         if (!ignore) {
           const pendingUsers = usersRes.ok ? usersRes.users.length : 0;
@@ -40,8 +44,17 @@ const Dashboard = () => {
 
           const newsPosts = newsRes.success ? newsRes.data.length : 0;
           const mediaItems = mediaRes.success ? mediaRes.data.length : 0;
+          const newsletterSubscribers = subscriberRes.success
+            ? subscriberRes.data.length
+            : 0;
 
-          setCounts({ pendingUsers, newMessages, newsPosts, mediaItems });
+          setCounts({
+            pendingUsers,
+            newMessages,
+            newsPosts,
+            mediaItems,
+            newsletterSubscribers,
+          });
         }
       } catch (err) {
         console.error("Error loading dashboard counts", err);
@@ -89,6 +102,13 @@ const Dashboard = () => {
           <Link to="/admin/media" className="admin-dashboard-card">
             <span className="admin-dashboard-count">{counts.mediaItems}</span>
             <span className="admin-dashboard-label">Media Items</span>
+          </Link>
+
+          <Link to="/admin/newsletter" className="admin-dashboard-card">
+            <span className="admin-dashboard-count">
+              {counts.newsletterSubscribers}
+            </span>
+            <span className="admin-dashboard-label">Subscribers</span>
           </Link>
         </div>
       )}

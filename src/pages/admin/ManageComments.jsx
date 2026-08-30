@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "../../services/axios";
 import { approveComment } from "../../services/comments";
+import { formatDateTime } from "../../utils/formatDate";
 
 const Comments = () => {
   const [comments, setComments] = useState([]);
@@ -172,10 +173,7 @@ const Comments = () => {
                       <small>ID: {comment.content_id}</small>
                     </td>
                     <td role="cell" data-label="Created">
-                      {new Date(comment.created_at).toLocaleString(undefined, {
-                        dateStyle: "medium",
-                        timeStyle: "short",
-                      })}
+                      {formatDateTime(comment.created_at)}
                     </td>
                     <td
                       role="cell"

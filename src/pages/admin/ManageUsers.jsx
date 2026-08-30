@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { usersService } from "../../services/users";
+import { formatDateTime } from "../../utils/formatDate";
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -151,10 +152,7 @@ const ManageUsers = () => {
                     </span>
                   </td>
                   <td data-label="Created">
-                    {new Date(user.created_at).toLocaleString(undefined, {
-                      dateStyle: "medium",
-                      timeStyle: "short",
-                    })}
+                    {formatDateTime(user.created_at)}
                   </td>
                   <td data-label="Actions" className="button-group">
                     {!user.is_approved && (

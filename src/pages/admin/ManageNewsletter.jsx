@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { newsletterService } from "../../services/newsletter";
+import { formatDateTime } from "../../utils/formatDate";
 
 const ManageNewsletter = () => {
   const [subject, setSubject] = useState("");
@@ -241,14 +242,7 @@ const ManageNewsletter = () => {
                   {history.map((item) => (
                     <tr key={item.id}>
                       <td>{item.subject}</td>
-                      <td>
-                        {item.sent_at
-                          ? new Date(item.sent_at).toLocaleString(undefined, {
-                              dateStyle: "medium",
-                              timeStyle: "short",
-                            })
-                          : "—"}
-                      </td>
+                      <td>{formatDateTime(item.sent_at)}</td>
                     </tr>
                   ))}
                 </tbody>

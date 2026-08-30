@@ -80,8 +80,8 @@
   display: block;
   text-align: center;
   margin-top: 18px;
-  font-size: 0.85rem;
-  color: var(--color-primary, #4f46e5);
+  font-size: 1rem;
+  color: var(--color-lt-gray);
   text-decoration: none;
 }
 
