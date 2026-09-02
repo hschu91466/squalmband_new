@@ -22,7 +22,7 @@ const Navigation = () => {
     { id: "music", label: "music" },
     { id: "news", label: "news" },
     { id: "contact", label: "contact" },
-    { id: "tour", label: "tour" },
+    { id: "tour", label: "shows" },
     { id: "about", label: "about" },
   ];
 

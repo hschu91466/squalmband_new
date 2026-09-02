@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../models/ContactModel.php';
+require_once __DIR__ . '/../models/ContactReplyModel.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as PHPMailerException;
@@ -62,6 +63,59 @@ class ContactService
             "success" => $success,
             "message" => $success ? "Marked as spam ✅" : "Failed ❌"
         ];
+    }
+
+    public function replyToMessage(PDO $pdo, int $messageId, string $replyBody, ?int $sentBy): array
+    {
+        $message = ContactModel::getById($pdo, $messageId);
+        if (!$message) {
+            return ['success' => false, 'message' => 'Message not found'];
+        }
+
+        $sent = $this->sendReply($message, $replyBody);
+        if (!$sent) {
+            return ['success' => false, 'message' => 'Failed to send reply'];
+        }
+
+        $reply = ContactReplyModel::create($pdo, $messageId, $replyBody, $sentBy);
+        ContactModel::markAsRead($pdo, $messageId);
+
+        return ['success' => true, 'data' => $reply, 'message' => 'Reply sent'];
+    }
+
+    private function sendReply(array $message, string $replyBody): bool
+    {
+        $mail = new PHPMailer(true);
+
+        try {
+            $mail->isSMTP();
+            $mail->SMTPDebug = 2;
+            $mail->Debugoutput = function ($str, $level) {
+                error_log("PHPMailer debug: $str");
+            };
+            $mail->Host       = $_ENV['BREVO_SMTP_HOST'] ?? getenv('BREVO_SMTP_HOST');
+            $mail->SMTPAuth   = true;
+            $mail->AuthType   = 'LOGIN';
+            $mail->Username   = $_ENV['BREVO_SMTP_USER'] ?? getenv('BREVO_SMTP_USER');
+            $mail->Password   = $_ENV['BREVO_SMTP_PASSWORD'] ?? getenv('BREVO_SMTP_PASSWORD');
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = (int) ($_ENV['BREVO_SMTP_PORT'] ?? getenv('BREVO_SMTP_PORT'));
+
+            $mail->setFrom(
+                $_ENV['MAIL_FROM_ADDRESS'] ?? getenv('MAIL_FROM_ADDRESS'),
+                $_ENV['MAIL_FROM_NAME'] ?? getenv('MAIL_FROM_NAME')
+            );
+            $mail->addAddress($message['email'], $message['first_name'] . ' ' . $message['last_name']);
+
+            $mail->Subject = "Re: " . ($message['subject'] ?? '(no subject)');
+            $mail->Body    = $replyBody;
+
+            $mail->send();
+            return true;
+        } catch (PHPMailerException $e) {
+            error_log('Contact reply email failed: ' . $mail->ErrorInfo);
+            return false;
+        }
     }
 
     public function delete(PDO $pdo, int $id): array

@@ -38,15 +38,6 @@ const AdminLayout = () => {
               </li>
               <li>
                 <NavLink
-                  to="/admin/news"
-                  onClick={closeSidebar}
-                  className={({ isActive }) => (isActive ? "active" : "")}
-                >
-                  Manage News
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
                   to="/admin/users"
                   onClick={closeSidebar}
                   className={({ isActive }) => (isActive ? "active" : "")}
@@ -81,6 +72,17 @@ const AdminLayout = () => {
                   Manage Media
                 </NavLink>
               </li>
+
+              <li>
+                <NavLink
+                  to="/admin/news"
+                  onClick={closeSidebar}
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  Manage News
+                </NavLink>
+              </li>
+
               <li>
                 <NavLink
                   to="/admin/newsletter"
@@ -88,6 +90,24 @@ const AdminLayout = () => {
                   className={({ isActive }) => (isActive ? "active" : "")}
                 >
                   Manage Newsletter
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/admin/shows"
+                  onClick={closeSidebar}
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  Manage Shows
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/admin/content"
+                  onClick={closeSidebar}
+                  className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                  Manage Content
                 </NavLink>
               </li>
             </ul>

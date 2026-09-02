@@ -23,4 +23,17 @@ export const messagesService = {
     });
     return res.data;
   },
+  reply: async (messageId, replyBody) => {
+    const res = await axios.post("/api/contact/reply.php", {
+      message_id: messageId,
+      reply: replyBody,
+    });
+    return res.data;
+  },
+  getReplies: async (messageId) => {
+    const res = await axios.get("/api/contact/replies.php", {
+      params: { message_id: messageId },
+    });
+    return res.data;
+  },
 };

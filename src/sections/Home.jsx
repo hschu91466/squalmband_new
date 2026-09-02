@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { mediaService } from "../services/media";
+import { contentService } from "../services/content";
+import RichText from "../components/features/RichText";
 import { Play } from "lucide-react";
 import {
   FaFacebook,
@@ -45,6 +47,7 @@ const SOCIAL_LINKS = [
 
 const Home = () => {
   const [featuredVideo, setFeaturedVideo] = useState(null);
+  const [content, setContent] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -60,27 +63,32 @@ const Home = () => {
         }
       } catch (err) {
         console.error("Failed to load featured video:", err);
-      } finally {
-        setLoading(false);
       }
     };
 
-    loadFeatured();
+    const loadContent = async () => {
+      try {
+        const response = await contentService.list();
+        if (response.success) {
+          const home = response.data.find((s) => s.section_key === "home");
+          setContent(home || null);
+        }
+      } catch (err) {
+        console.error("Failed to load Home content:", err);
+      }
+    };
+
+    Promise.all([loadFeatured(), loadContent()]).finally(() =>
+      setLoading(false),
+    );
   }, []);
 
   return (
     <section id="home">
       <div className="home-main">
         <div className="home-content">
-          <h2>Are you looking for us??</h2>
-          <p>
-            Squalm's music is inspired by the heavy rhythm of Funk, the
-            psychedelic melodies of Bedroom Rock, the lyrical creaminess of
-            American Folk Rock, and a general disregard for personal appearance.
-            They also have abrasive personalities. Also, we're in the market for
-            a reasonably sized coffee table, like, in case you have one you
-            don't want. Thank you, Mom, for making this website for us.
-          </p>
+          <h2>{content?.title || "Are you looking for us??"}</h2>
+          <RichText text={content?.body} />
         </div>
 
         {!loading && featuredVideo && (

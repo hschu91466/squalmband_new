@@ -1,41 +1,51 @@
+import { useEffect, useState } from "react";
 import NewsImageMedia from "../components/features/NewsImageMedia";
+import RichText from "../components/features/RichText";
+import { contentService } from "../services/content";
 
 const About = () => {
+  const [content, setContent] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadContent = async () => {
+      try {
+        const response = await contentService.list();
+        if (response.success) {
+          const about = response.data.find((s) => s.section_key === "about");
+          setContent(about || null);
+        }
+      } catch (err) {
+        console.error("Failed to load About content:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadContent();
+  }, []);
+
+  if (loading) return null;
+
   return (
     <section id="about" className="section-flex">
+      <h2>About</h2>
       <div className="section-content-center">
         <div className="about-grid grid-2col">
           <div className="about-column">
-            <h2 className="section-heading about-heading">About</h2>
+            {/* <h2 className="section-heading about-heading">
+              {content?.title || "About"}
+            </h2> */}
             <div className="about-bio card">
-              <p>
-                Brothers Josiah and Isaiah Schu were raised in Colfax,
-                Washington. They met coincidentally on the day of Isaiah's
-                birth. Since then, they've been as close as brothers; and soon,
-                with Isaiah learning drums and Josiah learning bass, they were
-                well on their way to becoming a struggling duo of almost
-                musicians.
-              </p>
-              <p>
-                After 15 years of playing and learning to produce and play
-                additional instruments they recorded their first album{" "}
-                <span>Dollar Bread</span> under the band name Squalm in their
-                filthy house in Moscow, Idaho, with the help of guitarist/cult
-                leader Marcus Mead.
-              </p>
-              <p className="about-bio-secondary">
-                In 2022, just after the release of their album, they set off to
-                struggle even harder in the big city. In Portland, Oregon, they
-                met Phil Felicia, their current guitarist, and are well on their
-                way to a more rewarding and fruitful struggle.
-              </p>
+              {content?.title && <h5>{content.title}</h5>}
+              <RichText text={content?.body} />
             </div>
           </div>
 
           <div className="about-photo-wrap">
             <NewsImageMedia
-              src="https://pub-a74fa48b03e04c5c8b558f051bb069dd.r2.dev/squalm/images/about/TheBoyz.png"
-              alt="Squalm band members Josiah Schu, Isaiah Schu, and Phil Felicia"
+              src={content?.image_path}
+              alt={content?.image_alt}
             />
           </div>
         </div>

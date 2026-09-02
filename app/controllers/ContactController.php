@@ -56,6 +56,25 @@ class ContactController
         return $service->markRead($this->pdo, $id);
     }
 
+    public function reply(array $data): array
+    {
+        $messageId = (int)($data['message_id'] ?? 0);
+        $replyBody = trim($data['reply'] ?? '');
+
+        if ($messageId <= 0) {
+            return ["success" => false, "message" => "Invalid message ID"];
+        }
+
+        if (empty($replyBody)) {
+            return ["success" => false, "message" => "Reply message required"];
+        }
+
+        $sentBy = $_SESSION['user']['id'] ?? null;
+
+        $service = new ContactService();
+        return $service->replyToMessage($this->pdo, $messageId, $replyBody, $sentBy);
+    }
+
     public function markSpam(array $data): array
     {
         $id = (int)$data['message_id'];

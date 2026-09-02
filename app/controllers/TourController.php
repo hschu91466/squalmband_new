@@ -113,7 +113,6 @@ class TourController
         if (strlen((string)$location) > 255) {
             $errors['location'] = 'Location too long';
         }
-
         return $errors;
     }
 

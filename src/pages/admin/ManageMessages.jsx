@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 import { messagesService } from "../../services/messages";
 import { formatDateTime } from "../../utils/formatDate";
+import ReplyForm from "../../components/admin/ReplyForm";
+import ReplyHistory from "../../components/admin/ReplyHistory";
 
 const ManageMessages = () => {
+  const [historyId, setHistoryId] = useState(null);
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
   const [error, setError] = useState("");
+  const [replyingId, setReplyingId] = useState(null);
 
   useEffect(() => {
     let ignore = false;
@@ -75,6 +79,29 @@ const ManageMessages = () => {
     } catch (err) {
       console.error("Delete error:", err);
     }
+  };
+
+  const handleReplyClick = (id) => {
+    setReplyingId(replyingId === id ? null : id);
+    setHistoryId(null);
+  };
+
+  const handleHistoryClick = (id) => {
+    setHistoryId(historyId === id ? null : id);
+    setReplyingId(null);
+  };
+
+  const handleSendReply = async (id, replyBody) => {
+    const data = await messagesService.reply(id, replyBody);
+
+    if (!data.success) {
+      throw new Error(data.message || "Failed to send reply");
+    }
+
+    setMessages((prev) =>
+      prev.map((msg) => (msg.message_id === id ? { ...msg, is_read: 1 } : msg)),
+    );
+    setReplyingId(null);
   };
 
   const nonSpamMessages = messages.filter((msg) => Number(msg.is_spam) !== 1);
@@ -162,6 +189,7 @@ const ManageMessages = () => {
                 <th scope="col">Status</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Subject</th>
                 <th scope="col">Message</th>
                 <th scope="col">Date</th>
                 <th scope="col">Actions</th>
@@ -171,61 +199,108 @@ const ManageMessages = () => {
             <tbody>
               {filteredMessages.map((msg) => {
                 const isRead = Number(msg.is_read) === 1;
+                const isReplying = replyingId === msg.message_id;
+                const isShowingHistory = historyId === msg.message_id;
 
                 return (
-                  <tr
-                    key={msg.message_id}
-                    className={!isRead ? "row-unread" : ""}
-                  >
-                    <td data-label="Status">
-                      <span
-                        className={`status-badge ${
-                          isRead ? "approved" : "pending"
-                        }`}
-                      >
-                        {isRead ? "Read" : "New"}
-                      </span>
-                    </td>
-
-                    <td data-label="Name">
-                      {msg.first_name} {msg.last_name}
-                    </td>
-                    <td data-label="Email">{msg.email}</td>
-
-                    <td data-label="Message" className="message-cell">
-                      {msg.message}
-                    </td>
-
-                    <td data-label="Date">{formatDateTime(msg.created_at)}</td>
-
-                    <td data-label="Actions" className="button-group">
-                      {!isRead && (
-                        <button
-                          className="btn btn-approve btn-sm"
-                          onClick={() => handleMarkRead(msg.message_id)}
-                          aria-label={`Mark message from ${msg.first_name} ${msg.last_name} as read`}
+                  <>
+                    <tr
+                      key={msg.message_id}
+                      className={!isRead ? "row-unread" : ""}
+                    >
+                      <td data-label="Status">
+                        <span
+                          className={`status-badge ${
+                            isRead ? "approved" : "pending"
+                          }`}
                         >
-                          Mark Read
+                          {isRead ? "Read" : "New"}
+                        </span>
+                      </td>
+
+                      <td data-label="Name">
+                        {msg.first_name} {msg.last_name}
+                      </td>
+                      <td data-label="Email">{msg.email}</td>
+                      <td data-label="Subject">{msg.subject}</td>
+
+                      <td data-label="Message" className="message-cell">
+                        {msg.message}
+                      </td>
+
+                      <td data-label="Date">
+                        {formatDateTime(msg.created_at)}
+                      </td>
+
+                      <td data-label="Actions" className="button-group">
+                        {!isRead && (
+                          <button
+                            className="btn btn-approve btn-sm"
+                            onClick={() => handleMarkRead(msg.message_id)}
+                            aria-label={`Mark message from ${msg.first_name} ${msg.last_name} as read`}
+                          >
+                            Mark Read
+                          </button>
+                        )}
+
+                        <button
+                          className="btn btn-reply btn-sm"
+                          onClick={() => handleReplyClick(msg.message_id)}
+                          aria-expanded={isReplying}
+                          aria-controls={`reply-form-${msg.message_id}`}
+                          aria-label={`Reply to message from ${msg.first_name} ${msg.last_name}`}
+                        >
+                          {isReplying ? "Cancel" : "Reply"}
                         </button>
-                      )}
 
-                      <button
-                        className="btn btn-spam btn-sm"
-                        onClick={() => handleMarkSpam(msg.message_id)}
-                        aria-label={`Mark message from ${msg.first_name} ${msg.last_name} as spam`}
-                      >
-                        Spam
-                      </button>
+                        <button
+                          className="btn btn-secondary btn-sm"
+                          onClick={() => handleHistoryClick(msg.message_id)}
+                          aria-expanded={isShowingHistory}
+                          aria-controls={`history-${msg.message_id}`}
+                          aria-label={`View reply history for message from ${msg.first_name} ${msg.last_name}`}
+                        >
+                          {isShowingHistory ? "Hide History" : "History"}
+                        </button>
 
-                      <button
-                        className="btn btn-delete btn-sm"
-                        onClick={() => handleDelete(msg.message_id)}
-                        aria-label={`Delete message from ${msg.first_name} ${msg.last_name}`}
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
+                        <button
+                          className="btn btn-spam btn-sm"
+                          onClick={() => handleMarkSpam(msg.message_id)}
+                          aria-label={`Mark message from ${msg.first_name} ${msg.last_name} as spam`}
+                        >
+                          Spam
+                        </button>
+
+                        <button
+                          className="btn btn-delete btn-sm"
+                          onClick={() => handleDelete(msg.message_id)}
+                          aria-label={`Delete message from ${msg.first_name} ${msg.last_name}`}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+
+                    {isReplying && (
+                      <tr key={`${msg.message_id}-reply`}>
+                        <td colSpan={7} className="reply-row">
+                          <ReplyForm
+                            message={msg}
+                            onSend={handleSendReply}
+                            onCancel={() => setReplyingId(null)}
+                          />
+                        </td>
+                      </tr>
+                    )}
+
+                    {isShowingHistory && (
+                      <tr key={`${msg.message_id}-history`}>
+                        <td colSpan={7} className="history-row">
+                          <ReplyHistory messageId={msg.message_id} />
+                        </td>
+                      </tr>
+                    )}
+                  </>
                 );
               })}
             </tbody>

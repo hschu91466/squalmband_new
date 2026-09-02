@@ -13,6 +13,9 @@ import ManageMedia from "./pages/admin/ManageMedia";
 import ManageMessages from "./pages/admin/ManageMessages";
 import ManageComments from "./pages/admin/ManageComments";
 import ManageNewsletter from "./pages/admin/ManageNewsletter";
+import ManageContent from "./pages/admin/ManageContent";
+
+import ManageTours from "./pages/admin/ManageTours";
 
 import MainPage from "./pages/MainPage";
 
@@ -38,6 +41,8 @@ const App = () => {
           <Route path="messages" element={<ManageMessages />} />
           <Route path="comments" element={<ManageComments />} />
           <Route path="newsletter" element={<ManageNewsletter />} />
+          <Route path="content" element={<ManageContent />} />
+          <Route path="shows" element={<ManageTours />} />
         </Route>
       </Route>
     </Routes>

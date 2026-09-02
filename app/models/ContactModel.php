@@ -33,6 +33,14 @@ class ContactModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public static function getById(PDO $pdo, int $id): ?array
+    {
+        $sql = "SELECT * FROM contact_messages WHERE message_id = :message_id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':message_id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
     public static function markAsRead(PDO $pdo, int $id): bool
     {
         $stmt = $pdo->prepare("

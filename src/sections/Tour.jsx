@@ -9,7 +9,7 @@ const Tour = () => {
   useEffect(() => {
     const loadDates = async () => {
       try {
-        const response = await tourService.listUpcoming();
+        const response = await tourService.list();
 
         if (response.success) {
           setDates(response.data);
@@ -26,7 +26,7 @@ const Tour = () => {
 
   return (
     <section id="tour" className="section-flex">
-      <h2 className="section-heading">Tour</h2>
+      <h2 className="section-heading">Now Showing</h2>
 
       <div className="section-content-center">
         {loading && <p>Loading...</p>}
